@@ -61,11 +61,8 @@ modules:
         buildsystem: simple
         build-commands:
           - python3 waf configure --prefix=/app 
-                                  --enable-libmpv-shared 
                                   --disable-build-date 
-                                  --disable-alsa --disable-build-date 
-                                  --enable-libmpv-shared 
-                                  --enable-sdl2 
+                                  --disable-alsa
                                   --enable-libarchive 
           - python3 waf build
           - python3 waf install
@@ -93,34 +90,34 @@ modules:
               - type: shell
                 commands:
                   - sed -i 's|/usr/local|/app|' ./Makefile
-          - name: libv4l2
-            cleanup:
-              - /sbin
-              - /bin
-              - /include
-              - /lib/*.la
-              - /lib/*/*.la
-              - /lib*/*/*/*.la
-              - /lib/pkgconfig
-              - /share/man
-            config-opts:
-              - '--disable-static'
-              - '--disable-bpf'
-              - '--with-udevdir=/app/lib/udev'
-            sources:
-              - type: archive
-                url: 'https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2'
-                sha256: '956118713f7ccb405c55c7088a6a2490c32d54300dd9a30d8d5008c28d3726f7'
-          - name: nv-codec-headers
-            cleanup:
-              - '*'
-            no-autogen: true
-            make-install-args:
-              - PREFIX=/app
-            sources:
-              - type: archive
-                url: 'https://github.com/FFmpeg/nv-codec-headers/releases/download/n11.0.10.0/nv-codec-headers-11.0.10.0.tar.gz'
-                sha256: 'e5d1fe6b18254a3c8747a38714564030e4fda506961a11a7eafb94f2400419bb'
+          #- name: libv4l2
+          #  cleanup:
+          #    - /sbin
+          #    - /bin
+          #    - /include
+          #    - /lib/*.la
+          #    - /lib/*/*.la
+          #    - /lib*/*/*/*.la
+          #    - /lib/pkgconfig
+          #    - /share/man
+          #  config-opts:
+          #    - '--disable-static'
+          #    - '--disable-bpf'
+          #    - '--with-udevdir=/app/lib/udev'
+          #  sources:
+          #    - type: archive
+          #      url: 'https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2'
+          #      sha256: '956118713f7ccb405c55c7088a6a2490c32d54300dd9a30d8d5008c28d3726f7'
+          #- name: nv-codec-headers
+          #  cleanup:
+          #    - '*'
+          #  no-autogen: true
+          #  make-install-args:
+          #    - PREFIX=/app
+          #  sources:
+          #    - type: archive
+          #      url: 'https://github.com/FFmpeg/nv-codec-headers/releases/download/n11.0.10.0/nv-codec-headers-11.0.10.0.tar.gz'
+          #      sha256: 'e5d1fe6b18254a3c8747a38714564030e4fda506961a11a7eafb94f2400419bb'
           - name: ffmpeg
             cleanup:
               - /include
