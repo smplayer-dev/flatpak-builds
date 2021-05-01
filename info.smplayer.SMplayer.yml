@@ -34,6 +34,7 @@ modules:
         sha256: '634baadf65e843c7e92090d27117c0ee9dd161deb1d4f5994ac63201860a7ff7'
     modules:
       - name: taglib
+        disabled: true
         buildsystem: cmake-ninja
         config-opts:
         - '-DBUILD_SHARED_LIBS=ON'
@@ -42,25 +43,27 @@ modules:
           url: 'https://github.com/taglib/taglib/releases/download/v1.12/taglib-1.12.tar.gz'
           sha256: '7fccd07669a523b07a15bd24c8da1bbb92206cb19e9366c3692af3d79253b703'
       - name: ffmpegthumbs
+        disabled: true
         buildsystem: cmake-ninja
         sources:
         - type: archive
           url: 'https://invent.kde.org/multimedia/ffmpegthumbs/-/archive/v20.12.3/ffmpegthumbs-v20.12.3.tar.gz'
           sha256: '9292a503808688b37e45ee336efcd28c39035d49c96e1df466b091f2eaf7a529'
       - name: kio-extras
+        disabled: true
         buildsystem: cmake-ninja
         sources:
         - type: archive
           url: 'https://invent.kde.org/network/kio-extras/-/archive/v20.12.3/kio-extras-v20.12.3.tar.gz'
           sha256: 'bedccdbf3664f2669270c2864c6f7c0e73237d18fae04067bc21ae5e12716b0b'
-      - name: libmpv
+      - name: mpv
         cleanup:
           - /include
           - /lib/pkgconfig
           - /share/man
         buildsystem: simple
         build-commands:
-          - python3 waf configure --prefix=/app 
+          - python3 waf configure --prefix=/app
                                   --disable-build-date 
                                   --disable-alsa
                                   --enable-libarchive 
@@ -76,6 +79,7 @@ modules:
             dest-filename: waf
         modules:
           - name: luajit
+            disabled: true
             no-autogen: true
             cleanup:
               - /bin
@@ -90,34 +94,36 @@ modules:
               - type: shell
                 commands:
                   - sed -i 's|/usr/local|/app|' ./Makefile
-          #- name: libv4l2
-          #  cleanup:
-          #    - /sbin
-          #    - /bin
-          #    - /include
-          #    - /lib/*.la
-          #    - /lib/*/*.la
-          #    - /lib*/*/*/*.la
-          #    - /lib/pkgconfig
-          #    - /share/man
-          #  config-opts:
-          #    - '--disable-static'
-          #    - '--disable-bpf'
-          #    - '--with-udevdir=/app/lib/udev'
-          #  sources:
-          #    - type: archive
-          #      url: 'https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2'
-          #      sha256: '956118713f7ccb405c55c7088a6a2490c32d54300dd9a30d8d5008c28d3726f7'
-          #- name: nv-codec-headers
-          #  cleanup:
-          #    - '*'
-          #  no-autogen: true
-          #  make-install-args:
-          #    - PREFIX=/app
-          #  sources:
-          #    - type: archive
-          #      url: 'https://github.com/FFmpeg/nv-codec-headers/releases/download/n11.0.10.0/nv-codec-headers-11.0.10.0.tar.gz'
-          #      sha256: 'e5d1fe6b18254a3c8747a38714564030e4fda506961a11a7eafb94f2400419bb'
+          - name: libv4l2
+            disabled: true
+            cleanup:
+              - /sbin
+              - /bin
+              - /include
+              - /lib/*.la
+              - /lib/*/*.la
+              - /lib*/*/*/*.la
+              - /lib/pkgconfig
+              - /share/man
+            config-opts:
+              - '--disable-static'
+              - '--disable-bpf'
+              - '--with-udevdir=/app/lib/udev'
+            sources:
+              - type: archive
+                url: 'https://linuxtv.org/downloads/v4l-utils/v4l-utils-1.20.0.tar.bz2'
+                sha256: '956118713f7ccb405c55c7088a6a2490c32d54300dd9a30d8d5008c28d3726f7'
+          - name: nv-codec-headers
+            disabled: true
+            cleanup:
+              - '*'
+            no-autogen: true
+            make-install-args:
+              - PREFIX=/app
+            sources:
+              - type: archive
+                url: 'https://github.com/FFmpeg/nv-codec-headers/releases/download/n11.0.10.0/nv-codec-headers-11.0.10.0.tar.gz'
+                sha256: 'e5d1fe6b18254a3c8747a38714564030e4fda506961a11a7eafb94f2400419bb'
           - name: ffmpeg
             cleanup:
               - /include
@@ -172,6 +178,7 @@ modules:
                 url: 'https://gitlab.freedesktop.org/uchardet/uchardet/-/archive/v0.0.7/uchardet-v0.0.7.tar.gz'
                 sha256: 'f3635d1d10e1470452bc42c1bf509451a9926b399a11740a9949e86069d69f58'
       - name: youtube-dl
+        disabled: true
         no-autogen: true
         no-make-install: true
         make-args:
@@ -185,22 +192,24 @@ modules:
             sha256: 'd80023ab221b3cb89229b632e247035a22c5afaee9a7b3c653bbd702f71c1083'
 
       - name: smplayer-skins
+        disabled: true
         buildsystem: simple
         build-commands:
           - make PREFIX=/app
           - make PREFIX=/app install
-          
+
         sources:
           - type: archive
             url: https://sourceforge.net/projects/smplayer/files/SMPlayer-skins/20.11.0/smplayer-skins-20.11.0.tar.bz2              
             sha256: 3bbfe7f31f2ebaa158b9e7c9f7601b0116eb375bb577cf65e313a9a45c622973
 
       - name: smplayer-themes
+        disabled: true
         buildsystem: simple
         build-commands:
           - make PREFIX=/app
           - make PREFIX=/app install
-          
+
         sources:
           - type: archive
             url: https://sourceforge.net/projects/smplayer/files/SMPlayer-themes/20.11.0/smplayer-themes-20.11.0.tar.bz2
