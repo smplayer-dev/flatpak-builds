@@ -1,5 +1,5 @@
 ---
-app-id: info.smplayer.SMplayer
+app-id: info.smplayer.SMPlayer
 runtime: org.kde.Platform
 runtime-version: '5.15'
 rename-desktop-file: smplayer.desktop
@@ -25,8 +25,8 @@ modules:
       - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=IDOPT_BUILD" install
       - mkdir -p /app/share/icons/hicolor/scalable/apps/
       - install  -Dm644 icons/smplayer.svg
-             /app/share/icons/hicolor/scalable/apps/info.smplayer.SMplayer.svg
-      - desktop-file-edit --set-icon=info.smplayer.SMplayer 
+             /app/share/icons/hicolor/scalable/apps/info.smplayer.SMPlayer.svg
+      - desktop-file-edit --set-icon=info.smplayer.SMPlayer 
              /app/share/applications/smplayer.desktop
     sources:
       #- type: archive
