@@ -1,6 +1,9 @@
-name: Test
+name: Build flatpak
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -20,20 +23,30 @@ jobs:
             flatpak-builder --repo=repo --force-clean --install --user build-dir/ info.smplayer.SMPlayer.yml
             flatpak build-bundle repo smplayer.flatpak info.smplayer.SMPlayer
 
-      - name: List
-        run: ls -lR build-dir/
+      #- name: List
+      #  run: ls -lR build-dir/
 
       #- name: Setup tmate session
       #  uses: mxschmitt/action-tmate@v3
       
-      - name: Create repo artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: repo
-          path: ./repo/
+      #- name: Create repo artifact
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: repo
+      #    path: ./repo/
 
       - name: Create artifact
         uses: actions/upload-artifact@v2
         with:
           name: smplayer.flatpak
           path: ./smplayer.flatpak
+
+      - name: Upload package to release
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./smplayer.flatpak
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
