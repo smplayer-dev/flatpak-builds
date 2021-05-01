@@ -18,6 +18,7 @@ jobs:
             flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
             flatpak install -y --user org.kde.Platform/x86_64/5.15 org.kde.Sdk/x86_64/5.15 
             flatpak-builder --repo=repo --force-clean --install --user build-dir/ info.smplayer.SMPlayer.yml
+            flatpak build-bundle repo smplayer.flatpak info.smplayer.SMPlayer
 
       - name: List
         run: ls -lR build-dir/
@@ -25,8 +26,14 @@ jobs:
       #- name: Setup tmate session
       #  uses: mxschmitt/action-tmate@v3
       
-      - name: Create artifact
+      - name: Create repo artifact
         uses: actions/upload-artifact@v2
         with:
           name: repo
           path: ./repo/
+
+      - name: Create artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: smplayer.flatpak
+          path: ./smplayer.flatpak
