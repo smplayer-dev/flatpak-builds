@@ -1,4 +1,6 @@
 app-id: info.smplayer.SMPlayer
+base: io.qt.qtwebkit.BaseApp
+base-version: '5.15'
 runtime: org.kde.Platform
 runtime-version: '5.15'
 sdk: org.kde.Sdk
@@ -35,7 +37,7 @@ modules:
 
     modules:
       - name: mpv
-        #disabled: true
+        disabled: true
         cleanup:
           - /include
           - /lib/pkgconfig
@@ -161,3 +163,17 @@ modules:
           - type: archive
             url: https://sourceforge.net/projects/smplayer/files/SMPlayer-themes/20.11.0/smplayer-themes-20.11.0.tar.bz2
             sha256: b99c02a13e5587e0c59d127d2f2536a1bc2740e726fadb47c89d349df5951132
+
+      - name: smtube
+        #disabled: true
+        buildsystem: simple
+        build-options:
+          env:
+            QMAKEPATH: /app/lib
+        build-commands:
+          - ./get_svn_revision.sh
+          - make PREFIX=/app install
+        sources:
+          - type: git
+            url: https://github.com/smplayer-dev/smtube.git
+            tag: v20.6.0.1017
