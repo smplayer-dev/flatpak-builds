@@ -21,7 +21,8 @@ jobs:
         with:
           bundle: mpv.flatpak
           manifest-path: io.mpv.Mpv.yml
-          cache-key: flatpak-builder-${{ github.sha }}
+          cache: true
+          #cache-key: flatpak-builder-${{ github.sha }}
     
       - name: Upload package to release
         if: github.event_name == 'release'
