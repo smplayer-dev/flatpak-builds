@@ -1,8 +1,8 @@
 app-id: info.smplayer.SMPlayer
 runtime: org.kde.Platform
 runtime-version: '5.15'
-rename-desktop-file: smplayer.desktop
 sdk: org.kde.Sdk
+rename-desktop-file: smplayer.desktop
 command: smplayer
 finish-args:
   - '--share=ipc'
@@ -17,6 +17,7 @@ finish-args:
   - '--env=DCONF_USER_CONFIG_DIR=.config/dconf'
   - '--env=LC_NUMERIC=C'
   - '--env=XDG_DATA_DIRS=/usr/share:/app/share/'
+
 modules:
   - name: smplayer
     buildsystem: simple
@@ -28,15 +29,13 @@ modules:
       - desktop-file-edit --set-icon=info.smplayer.SMPlayer 
              /app/share/applications/smplayer.desktop
     sources:
-      #- type: archive
-      #  url: https://downloads.sourceforge.net/smplayer/smplayer-21.1.0.tar.bz2
-      #  sha256: '634baadf65e843c7e92090d27117c0ee9dd161deb1d4f5994ac63201860a7ff7'
       - type: git
         url: https://github.com/smplayer-dev/smplayer.git
         disable-shallow-clone: true
+
     modules:
       - name: mpv
-        disabled: true
+        #disabled: true
         cleanup:
           - /include
           - /lib/pkgconfig
@@ -44,9 +43,9 @@ modules:
         buildsystem: simple
         build-commands:
           - python3 waf configure --prefix=/app
-                                  --disable-build-date 
+                                  --disable-build-date
                                   --disable-alsa
-                                  --enable-libarchive 
+                                  --enable-libarchive
           - python3 waf build
           - python3 waf install
         sources:
@@ -57,6 +56,7 @@ modules:
             url: 'https://waf.io/waf-2.0.21'
             sha256: '7cebf2c5efe53cbb9a4b5bdc4b49ae90ecd64a8fce7a3222d58e591b58215306'
             dest-filename: waf
+
         modules:
           - name: nv-codec-headers
             disabled: true
@@ -69,6 +69,7 @@ modules:
               - type: archive
                 url: 'https://github.com/FFmpeg/nv-codec-headers/releases/download/n11.0.10.0/nv-codec-headers-11.0.10.0.tar.gz'
                 sha256: 'e5d1fe6b18254a3c8747a38714564030e4fda506961a11a7eafb94f2400419bb'
+
           - name: ffmpeg
             cleanup:
               - /include
@@ -97,6 +98,7 @@ modules:
               - type: archive
                 url: 'https://ffmpeg.org/releases/ffmpeg-4.3.2.tar.xz'
                 sha256: '46e4e64f1dd0233cbc0934b9f1c0da676008cad34725113fb7f802cfa84ccddb'
+
           - name: libass
             cleanup:
               - /include
@@ -108,6 +110,7 @@ modules:
               - type: archive
                 url: 'https://github.com/libass/libass/releases/download/0.15.0/libass-0.15.0.tar.gz'
                 sha256: '9cbddee5e8c87e43a5fe627a19cd2aa4c36552156eb4edcf6c5a30bd4934fe58'
+
           - name: uchardet
             buildsystem: cmake-ninja
             config-opts:
@@ -122,6 +125,7 @@ modules:
               - type: archive
                 url: 'https://gitlab.freedesktop.org/uchardet/uchardet/-/archive/v0.0.7/uchardet-v0.0.7.tar.gz'
                 sha256: 'f3635d1d10e1470452bc42c1bf509451a9926b399a11740a9949e86069d69f58'
+
       - name: youtube-dl
         disabled: true
         no-autogen: true
@@ -142,10 +146,9 @@ modules:
         build-commands:
           - make PREFIX=/app
           - make PREFIX=/app install
-
         sources:
           - type: archive
-            url: https://sourceforge.net/projects/smplayer/files/SMPlayer-skins/20.11.0/smplayer-skins-20.11.0.tar.bz2              
+            url: https://sourceforge.net/projects/smplayer/files/SMPlayer-skins/20.11.0/smplayer-skins-20.11.0.tar.bz2
             sha256: 3bbfe7f31f2ebaa158b9e7c9f7601b0116eb375bb577cf65e313a9a45c622973
 
       - name: smplayer-themes
@@ -154,7 +157,6 @@ modules:
         build-commands:
           - make PREFIX=/app
           - make PREFIX=/app install
-
         sources:
           - type: archive
             url: https://sourceforge.net/projects/smplayer/files/SMPlayer-themes/20.11.0/smplayer-themes-20.11.0.tar.bz2
