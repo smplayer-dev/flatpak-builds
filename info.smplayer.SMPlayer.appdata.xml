@@ -1,14 +1,14 @@
 <!-- Copyright 2015 Ankur Sinha <ankursinha AT fedoraproject DOT org> -->
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-  <id>smplayer</id>
-  
+  <id>info.smplayer.SMPlayer</id>
+
   <name>smplayer</name>
   <summary>A graphical frontend for mpv and mplayer</summary>
-  
+
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0-or-later</project_license>
-  
+
   <description>
     <p>
         SMPlayer is a free media player for Windows and Linux with built-in
@@ -33,7 +33,7 @@
         possibility to play Youtube videos or download subtitles. 
     </p>
   </description>
-  
+
   <launchable type="desktop-id">smplayer.desktop</launchable>
   <categories>
         <category>AudioVideo</category>
