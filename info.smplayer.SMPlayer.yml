@@ -24,11 +24,11 @@ modules:
   - name: smplayer
     buildsystem: simple
     build-commands:
-      - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=IDOPT_BUILD" install
+      - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=NO_MPLAYER" install
       - mkdir -p /app/share/icons/hicolor/scalable/apps/
       - install  -Dm644 icons/smplayer.svg
              /app/share/icons/hicolor/scalable/apps/info.smplayer.SMPlayer.svg
-      - desktop-file-edit --set-icon=info.smplayer.SMPlayer 
+      - desktop-file-edit --set-icon=info.smplayer.SMPlayer
              /app/share/applications/smplayer.desktop
     sources:
       - type: git
