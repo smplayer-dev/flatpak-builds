@@ -21,7 +21,8 @@ jobs:
         with:
           bundle: smplayer.flatpak
           manifest-path: info.smplayer.SMPlayer.yml
-          cache-key: flatpak-builder-${{ github.sha }}
+          cache: true
+          #cache-key: flatpak-builder-${{ github.sha }}
     
       - name: Create artifact
         uses: actions/upload-artifact@v2
