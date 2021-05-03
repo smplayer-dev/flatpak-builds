@@ -49,7 +49,6 @@ modules:
         buildsystem: simple
         build-commands:
           - python3 waf configure --prefix=/app
-                                  #--disable-build-date
                                   --disable-alsa
                                   --enable-libarchive
           - python3 waf build
