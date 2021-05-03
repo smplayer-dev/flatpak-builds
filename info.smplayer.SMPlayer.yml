@@ -223,9 +223,9 @@ modules:
             QMAKEPATH: /app/lib
         build-commands:
           - ./get_svn_revision.sh
-          - make PREFIX=/app install
+          - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_USE_PLAYERS" install
         sources:
           - type: git
             url: https://github.com/smplayer-dev/smtube.git
-            tag: v20.6.0.1017
+            #tag: v20.6.0.1017
             disable-shallow-clone: true
