@@ -65,7 +65,7 @@ modules:
 
         modules:
           - name: nv-codec-headers
-            disabled: true
+            #disabled: true
             cleanup:
               - '*'
             no-autogen: true
