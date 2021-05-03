@@ -18,7 +18,7 @@ finish-args:
   - '--talk-name=org.freedesktop.ScreenSaver'
   - '--env=DCONF_USER_CONFIG_DIR=.config/dconf'
   - '--env=LC_NUMERIC=C'
-  - '--env=XDG_DATA_DIRS=/usr/share:/app/share/'
+ 
 
 modules:
   - name: smplayer
