@@ -137,6 +137,7 @@ modules:
                           --disable-alsa
                           --enable-sdl2
                           --enable-libarchive
+                          --enable-gl-x11
   - python3 waf build
   - python3 waf install
   post-install:
