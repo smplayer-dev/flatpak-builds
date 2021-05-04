@@ -1,4 +1,4 @@
-name: Build flatpak 2
+name: Build flatpak package
 
 on:
   workflow_dispatch:
@@ -24,12 +24,6 @@ jobs:
           cache: true
           #cache-key: flatpak-builder-${{ github.sha }}
     
-      - name: Create artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: smplayer.flatpak
-          path: ./smplayer.flatpak
-
       - name: Upload package to release
         if: github.event_name == 'release'
         uses: svenstaro/upload-release-action@v2
@@ -38,4 +32,4 @@ jobs:
           file: ./smplayer.flatpak
           tag: ${{ github.ref }}
           overwrite: true
-          file_glob: true    
+          file_glob: true
