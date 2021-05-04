@@ -12,6 +12,7 @@ finish-args:
   - '--socket=x11'
   - '--socket=wayland'
   - '--socket=pulseaudio'
+  - '--socket=session-bus'
   - '--device=dri'
   - '--filesystem=host'
   - '--talk-name=ca.desrt.dconf'
