@@ -22,7 +22,7 @@ jobs:
           bundle: smplayer.flatpak
           manifest-path: info.smplayer.SMPlayer.yml
           cache: true
-          #cache-key: flatpak-builder-${{ github.sha }}
+          cache-key: smplayer-build
     
       - name: Upload package to release
         if: github.event_name == 'release'
