@@ -1,4 +1,4 @@
-name: Build flatpak package
+name: Build test package
 
 on: [workflow_dispatch]
 
