@@ -6,5 +6,10 @@ smplayer.flatpak:
 	flatpak-builder --repo=repo --force-clean --keep-build-dirs --install --user build-dir/ info.smplayer.SMPlayer.yml
 	flatpak build-bundle repo smplayer.flatpak info.smplayer.SMPlayer
 
+test.flatpak:
+	flatpak-builder --repo=repo --force-clean --keep-build-dirs --install --user build-dir/ info.smplayer.Test.yml
+	flatpak build-bundle repo test.flatpak info.smplayer.Test
+
 clean:
 	-rm smplayer.flatpak
+	-rm test.flatpak

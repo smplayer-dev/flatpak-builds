@@ -1,0 +1,41 @@
+app-id: info.smplayer.Test
+runtime: org.kde.Platform
+runtime-version: '5.15'
+sdk: org.kde.Sdk
+#rename-desktop-file: smplayer.desktop
+command: qtexample
+finish-args:
+  - '--share=ipc'
+  - '--share=network'
+  - '--socket=x11'
+  - '--socket=wayland'
+  - '--socket=pulseaudio'
+  - '--socket=session-bus'
+  - '--device=dri'
+  - '--filesystem=host'
+  - '--talk-name=ca.desrt.dconf'
+  - '--talk-name=org.freedesktop.ScreenSaver'
+  - '--env=DCONF_USER_CONFIG_DIR=.config/dconf'
+  - '--env=LC_NUMERIC=C'
+
+modules:
+  - name: test
+    buildsystem: simple
+    build-commands:
+      - tar xvfz qtexamples.tar.gz
+      - cd qt && qmake && make
+      - cd qt_opengl && qmake && make
+      - cp qt/qtexample /app/bin
+      - cp qt_opengl/qt_opengl /app/bin
+    sources:
+      - type: file
+        path: qtexamples.tar.gz
+
+    modules:
+      - name: mpv-bin
+        buildsystem: simple
+        build-commands:
+          - tar xvjf mpv_bin.tar.bz2 -C /
+        sources:
+          - type: file
+            path: mpv_bin.tar.bz2
