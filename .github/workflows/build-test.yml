@@ -1,0 +1,22 @@
+name: Build flatpak package
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:kde-5.15
+      options: --privileged
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Build
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
+        with:
+          bundle: test.flatpak
+          manifest-path: info.smplayer.Test.yml
+          cache: true
+          cache-key: test-build
