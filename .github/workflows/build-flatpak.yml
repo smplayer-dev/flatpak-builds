@@ -19,7 +19,6 @@ jobs:
             cd smplayer
             ./get_version.sh
             VERSION=`cat version`
-            dch -v $VERSION "Development version"
             echo "VERSION=$VERSION" >> $GITHUB_ENV
         
       - name: Checkout
