@@ -9,8 +9,8 @@ finish-args:
 modules:
   - name: ffmpeg
     cleanup:
-      - /include
-      - /lib/pkgconfig
+      #- /include
+      #- /lib/pkgconfig
       - /share/ffmpeg/examples
     config-opts:
       - '--enable-shared'
