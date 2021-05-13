@@ -2,7 +2,7 @@ app-id: org.ffmpeg.FFmpeg.yml
 runtime: org.kde.Platform
 runtime-version: '5.15'
 sdk: org.kde.Sdk
-command: ffmpeg
+#command: ffmpeg
 finish-args:
   - '--filesystem=host'
 
