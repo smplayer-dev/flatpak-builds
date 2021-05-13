@@ -107,6 +107,7 @@ modules:
     sha256: '956118713f7ccb405c55c7088a6a2490c32d54300dd9a30d8d5008c28d3726f7'
 
 - name: ffmpeg
+  disabled: true
   cleanup:
   - "/include"
   - "/lib/pkgconfig"
@@ -126,6 +127,18 @@ modules:
     url: https://ffmpeg.org/releases/ffmpeg-4.3.2.tar.xz
     sha256: 46e4e64f1dd0233cbc0934b9f1c0da676008cad34725113fb7f802cfa84ccddb
 
+- name: ffmpeg-bin
+  #disabled: true
+  cleanup:
+  - "/include"
+  - "/lib/pkgconfig"
+  - "/share/ffmpeg"
+  buildsystem: simple
+  build-commands:
+  - tar xvjf ffmpeg_bin.tar.bz2 -C /
+  sources:
+  - type: file
+    path: ffmpeg_bin.tar.bz2
 
 - name: mpv
   buildsystem: simple
