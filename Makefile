@@ -10,6 +10,11 @@ test.flatpak:
 	flatpak-builder --repo=repo --force-clean --keep-build-dirs --install --user build-dir/ info.smplayer.Test.yml
 	flatpak build-bundle repo test.flatpak info.smplayer.Test
 
+ffmpeg.flatpak:
+	flatpak-builder --repo=repo --force-clean --keep-build-dirs --install --user build-dir/ org.ffmpeg.FFmpeg.yml
+	flatpak build-bundle repo ffmpeg.flatpak org.ffmpeg.FFmpeg.yml
+
 clean:
 	-rm smplayer.flatpak
 	-rm test.flatpak
+	-rm ffmpeg.flatpak
