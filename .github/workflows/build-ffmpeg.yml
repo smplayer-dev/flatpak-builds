@@ -1,0 +1,35 @@
+name: Build ffmpeg
+
+on:
+  workflow_dispatch:
+  #release:
+  #  types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:kde-5.15
+      options: --privileged
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Build
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
+        with:
+          bundle: ffmpeg.flatpak
+          manifest-path: org.ffmpeg.FFmpeg.yml
+          cache: true
+          cache-key: ffmpeg-build
+    
+      - name: Upload package to release
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./ffmpeg.flatpak
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
