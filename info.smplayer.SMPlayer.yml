@@ -36,6 +36,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/smplayer-dev/smplayer.git
+        tag: v21.1.0.9630
         disable-shallow-clone: true
       - type: file
         path: info.smplayer.SMPlayer.appdata.xml
@@ -259,5 +260,5 @@ modules:
         sources:
           - type: git
             url: https://github.com/smplayer-dev/smtube.git
-            #tag: v20.6.0.1017
+            tag:  v20.6.0.1023
             disable-shallow-clone: true
