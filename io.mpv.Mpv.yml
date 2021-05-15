@@ -147,7 +147,7 @@ modules:
       - "/lib/pkgconfig"
     build-commands:
       - python3 waf configure --prefix=/app
-                              --enable-libmpv-shared 
+                              --enable-libmpv-shared
                               --disable-alsa
                               --enable-sdl2
                               --enable-libarchive

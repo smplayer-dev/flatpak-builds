@@ -14,7 +14,12 @@ ffmpeg.flatpak:
 	flatpak-builder --repo=repo --force-clean --keep-build-dirs --install --user build-dir/ org.ffmpeg.FFmpeg.yml
 	flatpak build-bundle repo ffmpeg.flatpak org.ffmpeg.FFmpeg.yml
 
+mpv.flatpak:
+	flatpak-builder --repo=repo --force-clean --keep-build-dirs --install --user build-dir/ io.mpv.Mpv.yml
+	flatpak build-bundle repo mpv.flatpak io.mpv.Mpv.yml
+
 clean:
 	-rm smplayer.flatpak
 	-rm test.flatpak
 	-rm ffmpeg.flatpak
+	-rm mpv.flatpak
