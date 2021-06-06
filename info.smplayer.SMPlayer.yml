@@ -25,7 +25,7 @@ modules:
   - name: smplayer
     buildsystem: simple
     build-commands:
-      - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE" install
+      - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SHM" install
       - mkdir -p /app/share/icons/hicolor/scalable/apps/
       - install  -Dm644 icons/smplayer.svg
              /app/share/icons/hicolor/scalable/apps/info.smplayer.SMPlayer.svg
@@ -36,7 +36,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/smplayer-dev/smplayer.git
-        tag: v21.1.0.9630
+        #tag: v21.1.0.9630
         disable-shallow-clone: true
       - type: file
         path: info.smplayer.SMPlayer.appdata.xml
@@ -208,9 +208,12 @@ modules:
                         --yasm=''
           - make install
         sources:
-          - type: archive
-            url: http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.4.tar.xz
-            sha256: 82596ed558478d28248c7bc3828eb09e6948c099bbd76bb7ee745a0e3275b548
+          #- type: archive
+          #  url: http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.4.tar.xz
+          #  sha256: 82596ed558478d28248c7bc3828eb09e6948c099bbd76bb7ee745a0e3275b548
+          - type: git
+            url: https://github.com/smplayer-dev/mplayer.git
+            tag: v1.4-58
 
       - name: youtube-dl
         disabled: true
@@ -260,5 +263,5 @@ modules:
         sources:
           - type: git
             url: https://github.com/smplayer-dev/smtube.git
-            tag:  v20.6.0.1023
+            tag: v20.6.0.1023
             disable-shallow-clone: true
