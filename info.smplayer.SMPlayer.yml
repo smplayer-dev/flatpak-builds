@@ -213,7 +213,7 @@ modules:
           #  sha256: 82596ed558478d28248c7bc3828eb09e6948c099bbd76bb7ee745a0e3275b548
           - type: git
             url: https://github.com/smplayer-dev/mplayer.git
-            tag: v1.4-58
+            #tag: v1.4-58
 
       - name: youtube-dl
         disabled: true
