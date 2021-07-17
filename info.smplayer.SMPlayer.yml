@@ -24,8 +24,15 @@ finish-args:
 modules:
   - name: smplayer
     buildsystem: simple
+    build-options:
+      env:
+        QMAKEPATH: /app/lib
     build-commands:
-      - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE" install
+      - ln -sf smtube-dir/src smtube
+      - cd smtube && lrelease smtube.pro && qmake DEFINES+="NO_DEBUG_ON_CONSOLE SMTUBE_LIB" && make -j2
+      - cp smtube/translations/*.qm src/translations/
+      #- make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE" install
+      - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SMTUBE_LIB" install -j2
       - mkdir -p /app/share/icons/hicolor/scalable/apps/
       - install  -Dm644 icons/smplayer.svg
              /app/share/icons/hicolor/scalable/apps/info.smplayer.SMPlayer.svg
@@ -37,9 +44,14 @@ modules:
       - type: git
         url: https://github.com/smplayer-dev/smplayer.git
         #tag: v21.1.0.9630
+        tag: master
         disable-shallow-clone: true
       - type: file
         path: info.smplayer.SMPlayer.appdata.xml
+      - type: git
+        url: https://github.com/smplayer-dev/smtube.git
+        tag: master
+        dest: smtube-dir
 
     modules:
       - name: mpv
@@ -255,7 +267,7 @@ modules:
             sha256: b99c02a13e5587e0c59d127d2f2536a1bc2740e726fadb47c89d349df5951132
 
       - name: smtube
-        #disabled: true
+        disabled: true
         buildsystem: simple
         build-options:
           env:
