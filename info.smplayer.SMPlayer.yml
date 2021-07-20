@@ -50,7 +50,8 @@ modules:
         path: info.smplayer.SMPlayer.appdata.xml
       - type: git
         url: https://github.com/smplayer-dev/smtube.git
-        tag: master
+        tag: v21.7.0
+        commit: 1badaac1eaa40c104716cdf22333b0c17e31d982
         dest: smtube-dir
 
     modules:
@@ -278,5 +279,6 @@ modules:
         sources:
           - type: git
             url: https://github.com/smplayer-dev/smtube.git
-            tag: v20.6.0.1023
+            tag: v21.7.0
+            commit: 1badaac1eaa40c104716cdf22333b0c17e31d982
             disable-shallow-clone: true
