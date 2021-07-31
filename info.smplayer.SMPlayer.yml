@@ -34,20 +34,21 @@ modules:
       #- make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE" install
       - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SHM DEFINES+=USE_SMTUBE_LIB" install -j2
       - mkdir -p /app/share/icons/hicolor/scalable/apps/
-      - install  -Dm644 icons/smplayer.svg
+      - install -Dm644 icons/smplayer.svg
              /app/share/icons/hicolor/scalable/apps/info.smplayer.SMPlayer.svg
       - desktop-file-edit --set-icon=info.smplayer.SMPlayer
              /app/share/applications/smplayer.desktop
-    post-install:
-      - install -D -m644 info.smplayer.SMPlayer.appdata.xml /app/share/appdata/info.smplayer.SMPlayer.appdata.xml
+      - mv /app/share/metainfo/smplayer.appdata.xml /app/share/appdata/info.smplayer.SMPlayer.appdata.xml
+    #post-install:
+    #  - install -D -m644 info.smplayer.SMPlayer.appdata.xml /app/share/appdata/info.smplayer.SMPlayer.appdata.xml
     sources:
       - type: git
         url: https://github.com/smplayer-dev/smplayer.git
         #tag: v21.1.0.9630
         tag: master
         disable-shallow-clone: true
-      - type: file
-        path: info.smplayer.SMPlayer.appdata.xml
+      #- type: file
+      #  path: info.smplayer.SMPlayer.appdata.xml
       - type: git
         url: https://github.com/smplayer-dev/smtube.git
         tag: v21.7.0
