@@ -38,7 +38,7 @@ modules:
              /app/share/icons/hicolor/scalable/apps/info.smplayer.SMPlayer.svg
       - desktop-file-edit --set-icon=info.smplayer.SMPlayer
              /app/share/applications/smplayer.desktop
-      - mv /app/share/metainfo/smplayer.appdata.xml /app/share/appdata/info.smplayer.SMPlayer.appdata.xml
+      - mv /app/share/metainfo/smplayer.appdata.xml /app/share/metainfo/info.smplayer.SMPlayer.appdata.xml
     #post-install:
     #  - install -D -m644 info.smplayer.SMPlayer.appdata.xml /app/share/appdata/info.smplayer.SMPlayer.appdata.xml
     sources:
