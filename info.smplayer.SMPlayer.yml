@@ -39,16 +39,12 @@ modules:
       - desktop-file-edit --set-icon=info.smplayer.SMPlayer
              /app/share/applications/smplayer.desktop
       - mv /app/share/metainfo/smplayer.appdata.xml /app/share/metainfo/info.smplayer.SMPlayer.appdata.xml
-    #post-install:
-    #  - install -D -m644 info.smplayer.SMPlayer.appdata.xml /app/share/appdata/info.smplayer.SMPlayer.appdata.xml
     sources:
       - type: git
         url: https://github.com/smplayer-dev/smplayer.git
         #tag: v21.1.0.9630
         tag: master
         disable-shallow-clone: true
-      #- type: file
-      #  path: info.smplayer.SMPlayer.appdata.xml
       - type: git
         url: https://github.com/smplayer-dev/smtube.git
         tag: v21.7.0
