@@ -110,7 +110,7 @@ modules:
                 sha256: 'e5d1fe6b18254a3c8747a38714564030e4fda506961a11a7eafb94f2400419bb'
 
           - name: ffmpeg
-            disabled: true
+            #disabled: true
             cleanup:
               - /include
               - /lib/pkgconfig
@@ -142,7 +142,7 @@ modules:
                 sha256: '06b10a183ce5371f915c6bb15b7b1fffbe046e8275099c96affc29e17645d909'
 
           - name: ffmpeg-bin
-            #disabled: true
+            disabled: true
             cleanup:
               - "/include"
               - "/lib/pkgconfig"
