@@ -13,14 +13,15 @@ finish-args:
   - '--socket=fallback-x11'
   #- '--socket=wayland'
   - '--socket=pulseaudio'
-  - '--socket=session-bus'
+  #- '--socket=session-bus'
   - '--device=dri'
-  - '--filesystem=host'
-  - '--talk-name=ca.desrt.dconf'
-  - '--talk-name=org.freedesktop.ScreenSaver'
-  - '--env=DCONF_USER_CONFIG_DIR=.config/dconf'
-  - '--env=LC_NUMERIC=C'
-
+  #- '--filesystem=host'
+  #- '--talk-name=ca.desrt.dconf'
+  #- '--talk-name=org.freedesktop.ScreenSaver'
+  #- '--env=DCONF_USER_CONFIG_DIR=.config/dconf'
+  #- '--env=LC_NUMERIC=C'
+  - '--own-name=org.mpris.MediaPlayer2.smplayer'
+  - '--filesystem=home'
 
 modules:
   - name: smplayer
@@ -30,9 +31,10 @@ modules:
         QMAKEPATH: /app/lib
     build-commands:
       - ln -sf smtube-dir/src smtube
-      - cd smtube && lrelease smtube.pro && qmake DEFINES+="SMTUBE_LIB" && make -j2
+      - cd smtube && lrelease smtube.pro && qmake DEFINES+="SMTUBE_LIB" && make
       - cp smtube/translations/*.qm src/translations/
-      - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SHM DEFINES+=USE_GL_WINDOW DEFINES+=USE_SMTUBE_LIB" install -j2
+      #- make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SHM DEFINES+=USE_GL_WINDOW DEFINES+=USE_SMTUBE_LIB" install -j2
+      - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SHM DEFINES+=USE_SMTUBE_LIB" install
       - mkdir -p /app/share/icons/hicolor/scalable/apps/
       - install -Dm644 icons/smplayer.svg
              /app/share/icons/hicolor/scalable/apps/info.smplayer.SMPlayer.svg
