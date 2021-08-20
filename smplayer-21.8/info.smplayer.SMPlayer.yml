@@ -14,9 +14,9 @@ finish-args:
   #- '--socket=wayland'
   - '--socket=pulseaudio'
   - '--device=dri'
+  - '--filesystem=host'
   - '--talk-name=org.freedesktop.ScreenSaver'
   - '--own-name=org.mpris.MediaPlayer2.smplayer'
-  - '--filesystem=home'
 
 modules:
   - name: smplayer
