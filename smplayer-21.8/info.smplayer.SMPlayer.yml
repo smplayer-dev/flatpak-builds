@@ -71,10 +71,10 @@ modules:
           #  url: 'https://github.com/smplayer-dev/mpv-mod.git'
           #  tag: v0.33.1-58
           #  commit: cf077ab770e4d839380f5797b4c164874aa6fb21
-          - type: file
+          - type: archive
             url: https://github.com/smplayer-dev/mpv-mod/archive/refs/tags/v0.33.1-58.tar.gz
             sha256: '3fa79858be7d4cb967e69364ccfd1e9b717fe3b94cbff4231c14239d1f474915'
-            dest: mpv
+            #dest: mpv
           - type: file
             url: 'https://waf.io/waf-2.0.21'
             sha256: '7cebf2c5efe53cbb9a4b5bdc4b49ae90ecd64a8fce7a3222d58e591b58215306'
@@ -192,9 +192,9 @@ modules:
           #  url: https://github.com/smplayer-dev/mplayer.git
           #  tag: v1.4-83
           #  commit: 09c649e889bf2345f1558427b4557fb0b656ef07
-          - type: file
+          - type: archive
             url: https://github.com/smplayer-dev/mplayer-mod/archive/refs/tags/v1.4-83.tar.gz
-            dest: mplayer
+            #dest: mplayer
             sha256: 'fbfd426822f7f075f19813850456b0e4efac16d793c3317724d189b6d202751f'
 
       - name: smplayer-skins
