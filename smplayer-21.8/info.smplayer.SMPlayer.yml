@@ -60,7 +60,6 @@ modules:
         buildsystem: simple
         build-commands:
           - python3 waf configure --prefix=/app
-                                  --disable-alsa
                                   --enable-libarchive
                                   --enable-gl-x11
           - python3 waf build
