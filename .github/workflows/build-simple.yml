@@ -41,7 +41,7 @@ jobs:
           bundle: smplayer-${{env.VERSION}}.flatpak
           manifest-path: simple/info.smplayer.SMPlayer.yml
           cache: true
-          cache-key: smplayer-build-${{runner.os}}-simple
+          cache-key: smplayer-build-${{runner.os}}-${{matrix.arch}}-simple
           arch: ${{ matrix.arch }}
     
       - name: Upload package to release
