@@ -10,8 +10,6 @@ finish-args:
   - '--share=ipc'
   - '--share=network'
   - '--socket=x11'
-  - '--socket=fallback-x11'
-  #- '--socket=wayland'
   - '--socket=pulseaudio'
   - '--device=dri'
   - '--filesystem=host'
@@ -26,10 +24,9 @@ modules:
         QMAKEPATH: /app/lib
     build-commands:
       - ln -sf smtube-dir/src smtube
-      - cd smtube && lrelease smtube.pro && qmake DEFINES+="SMTUBE_LIB" && make -j2
+      - cd smtube && lrelease smtube.pro && qmake DEFINES+="SMTUBE_LIB" && make -j$FLATPAK_BUILDER_N_JOBS
       - cp smtube/translations/*.qm src/translations/
-      #- make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE" install
-      - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SHM DEFINES+=USE_SMTUBE_LIB" install -j2
+      - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SHM DEFINES+=USE_SMTUBE_LIB" -j$FLATPAK_BUILDER_N_JOBS install
       - mkdir -p /app/share/icons/hicolor/scalable/apps/
       - install -Dm644 icons/smplayer.svg
              /app/share/icons/hicolor/scalable/apps/info.smplayer.SMPlayer.svg
@@ -39,8 +36,9 @@ modules:
     sources:
       - type: git
         url: https://github.com/smplayer-dev/smplayer.git
-        #tag: v21.1.0.9630
         tag: master
+        #tag: v21.8.0
+        #commit: 0362b21519f69f1baa2525522b43f07134c57fd4
         disable-shallow-clone: true
       - type: git
         url: https://github.com/smplayer-dev/smtube.git
@@ -50,7 +48,6 @@ modules:
 
     modules:
       - name: mpv
-        #disabled: true
         cleanup:
           - /include
           - /lib/pkgconfig
@@ -63,12 +60,11 @@ modules:
           - python3 waf build
           - python3 waf install
         sources:
-          #- type: archive
-          #  url: 'https://github.com/mpv-player/mpv/archive/v0.33.1.tar.gz'
-          #  sha256: '100a116b9f23bdcda3a596e9f26be3a69f166a4f1d00910d1789b6571c46f3a9'
           - type: git
             url: 'https://github.com/smplayer-dev/mpv-mod.git'
             tag: 'main'
+            #tag: v0.33.1-58
+            #commit: cf077ab770e4d839380f5797b4c164874aa6fb21
           - type: file
             url: 'https://waf.io/waf-2.0.21'
             sha256: '7cebf2c5efe53cbb9a4b5bdc4b49ae90ecd64a8fce7a3222d58e591b58215306'
@@ -76,7 +72,6 @@ modules:
 
         modules:
           - name: luajit
-            #disabled: true
             no-autogen: true
             cleanup:
               - /bin
@@ -93,7 +88,6 @@ modules:
                   - sed -i 's|/usr/local|/app|' ./Makefile
 
           - name: nv-codec-headers
-            #disabled: true
             cleanup:
               - '*'
             no-autogen: true
@@ -105,7 +99,6 @@ modules:
                 sha256: 'e5d1fe6b18254a3c8747a38714564030e4fda506961a11a7eafb94f2400419bb'
 
           - name: ffmpeg
-            #disabled: true
             cleanup:
               - /include
               - /lib/pkgconfig
@@ -131,26 +124,10 @@ modules:
               - '--enable-libwebp'
             sources:
               - type: archive
-                #url: 'https://ffmpeg.org/releases/ffmpeg-4.3.2.tar.xz'
-                #sha256: '46e4e64f1dd0233cbc0934b9f1c0da676008cad34725113fb7f802cfa84ccddb'
                 url: 'https://ffmpeg.org/releases/ffmpeg-4.4.tar.xz'
                 sha256: '06b10a183ce5371f915c6bb15b7b1fffbe046e8275099c96affc29e17645d909'
 
-          - name: ffmpeg-bin
-            disabled: true
-            cleanup:
-              - "/include"
-              - "/lib/pkgconfig"
-              - "/share/ffmpeg"
-            buildsystem: simple
-            build-commands:
-              - tar xvjf ffmpeg_bin.tar.bz2 -C /
-            sources:
-              - type: file
-                path: ffmpeg_bin.tar.bz2
-
           - name: libass
-            #disabled: true
             cleanup:
               - /include
               - /lib/*.la
@@ -163,7 +140,6 @@ modules:
                 sha256: '9cbddee5e8c87e43a5fe627a19cd2aa4c36552156eb4edcf6c5a30bd4934fe58'
 
           - name: uchardet
-            #disabled: true
             buildsystem: cmake-ninja
             config-opts:
               - '-DCMAKE_BUILD_TYPE=Release'
@@ -179,7 +155,6 @@ modules:
                 sha256: 'f3635d1d10e1470452bc42c1bf509451a9926b399a11740a9949e86069d69f58'
 
           - name: fribidi
-            #disabled: true
             cleanup:
               - "/bin"
               - "/include"
@@ -191,55 +166,31 @@ modules:
                 url: https://github.com/fribidi/fribidi/releases/download/v1.0.5/fribidi-1.0.5.tar.bz2
                 sha256: 6a64f2a687f5c4f203a46fa659f43dd43d1f8b845df8d723107e8a7e6158e4ce
 
-      - name: mpv-bin
-        disabled: true
-        cleanup:
-          - /include
-          - /lib/pkgconfig
-          - /share/man
-        buildsystem: simple
-        build-commands:
-          - tar xvjf mpv_bin.tar.bz2 -C /
-        sources:
-          - type: file
-            path: mpv_bin.tar.bz2
-
       - name: mplayer
-        #disabled: true
         buildsystem: simple
+        build-options:
+          arch:
+            x86_64:
+              env:
+                ENABLE_RUNTIME_CPUDETECTION: --enable-runtime-cpudetection
         build-commands:
           - ./configure --prefix=/app
                         --disable-libmpeg2-internal
                         --disable-ffmpeg_a
                         --disable-gui
                         --disable-mencoder
-                        --enable-runtime-cpudetection
                         --yasm=''
+                        $ENABLE_RUNTIME_CPUDETECTION
+          - make -j$FLATPAK_BUILDER_N_JOBS
           - make install
         sources:
-          #- type: archive
-          #  url: http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.4.tar.xz
-          #  sha256: 82596ed558478d28248c7bc3828eb09e6948c099bbd76bb7ee745a0e3275b548
           - type: git
-            url: https://github.com/smplayer-dev/mplayer.git
+            url: https://github.com/smplayer-dev/mplayer-mod.git
             tag: 'main'
-
-      - name: youtube-dl
-        disabled: true
-        no-autogen: true
-        no-make-install: true
-        make-args:
-          - youtube-dl
-          - PYTHON=/usr/bin/python3
-        post-install:
-          - install youtube-dl /app/bin
-        sources:
-          - type: archive
-            url: 'https://github.com/ytdl-org/youtube-dl/archive/2021.04.26.tar.gz'
-            sha256: 'd80023ab221b3cb89229b632e247035a22c5afaee9a7b3c653bbd702f71c1083'
+            #tag: v1.4-83
+            #commit: 09c649e889bf2345f1558427b4557fb0b656ef07
 
       - name: smplayer-skins
-        #disabled: true
         buildsystem: simple
         build-commands:
           - make PREFIX=/app
@@ -250,7 +201,6 @@ modules:
             sha256: 3bbfe7f31f2ebaa158b9e7c9f7601b0116eb375bb577cf65e313a9a45c622973
 
       - name: smplayer-themes
-        #disabled: true
         buildsystem: simple
         build-commands:
           - make PREFIX=/app
@@ -260,18 +210,3 @@ modules:
             url: https://sourceforge.net/projects/smplayer/files/SMPlayer-themes/20.11.0/smplayer-themes-20.11.0.tar.bz2
             sha256: b99c02a13e5587e0c59d127d2f2536a1bc2740e726fadb47c89d349df5951132
 
-      - name: smtube
-        disabled: true
-        buildsystem: simple
-        build-options:
-          env:
-            QMAKEPATH: /app/lib
-        build-commands:
-          - ./get_svn_revision.sh
-          - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_USE_PLAYERS" install
-        sources:
-          - type: git
-            url: https://github.com/smplayer-dev/smtube.git
-            tag: v21.7.0
-            commit: 1badaac1eaa40c104716cdf22333b0c17e31d982
-            disable-shallow-clone: true

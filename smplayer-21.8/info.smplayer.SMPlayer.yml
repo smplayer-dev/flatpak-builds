@@ -192,7 +192,7 @@ modules:
           - make install
         sources:
           #- type: git
-          #  url: https://github.com/smplayer-dev/mplayer.git
+          #  url: https://github.com/smplayer-dev/mplayer-mod.git
           #  tag: v1.4-83
           #  commit: 09c649e889bf2345f1558427b4557fb0b656ef07
           - type: archive
