@@ -10,7 +10,6 @@ finish-args:
   - '--share=ipc'
   - '--share=network'
   - '--socket=x11'
-  - '--socket=fallback-x11'
   - '--socket=pulseaudio'
   - '--device=dri'
   - '--filesystem=host'
@@ -162,15 +161,23 @@ modules:
                 sha256: 6a64f2a687f5c4f203a46fa659f43dd43d1f8b845df8d723107e8a7e6158e4ce
 
       - name: mplayer
-        only-arches: [x86_64]
         buildsystem: simple
         build-commands:
-          - ./configure --prefix=/app
+          arch:
+            - x86_64:
+              - ./configure --prefix=/app
                         --disable-libmpeg2-internal
                         --disable-ffmpeg_a
                         --disable-gui
                         --disable-mencoder
                         --enable-runtime-cpudetection
+                        --yasm=''
+            - aarch64:
+              - ./configure --prefix=/app
+                        --disable-libmpeg2-internal
+                        --disable-ffmpeg_a
+                        --disable-gui
+                        --disable-mencoder
                         --yasm=''
           - make install
         sources:
