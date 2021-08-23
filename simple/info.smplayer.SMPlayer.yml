@@ -172,6 +172,7 @@ modules:
                         --disable-mencoder
                         --enable-runtime-cpudetection
                         --yasm=''
+              - make install
             - aarch64:
               - ./configure --prefix=/app
                         --disable-libmpeg2-internal
@@ -179,7 +180,7 @@ modules:
                         --disable-gui
                         --disable-mencoder
                         --yasm=''
-          - make install
+              - make install
         sources:
           - type: archive
             url: http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.4.tar.xz
