@@ -59,9 +59,8 @@ modules:
           - /share/man
         buildsystem: simple
         build-commands:
-          - python3 waf configure --prefix=/app
-                                  --enable-libarchive
-                                  --enable-gl-x11
+          #- python3 waf configure --prefix=/app --enable-libarchive --enable-gl-x11
+          - python3 waf configure --prefix=/app --enable-gl-x11
           - python3 waf build
           - python3 waf install
         sources:
