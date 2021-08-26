@@ -19,7 +19,7 @@ jobs:
       - name: Cache
         uses: actions/cache@v2
         with:
-          path: .flatpak-builder
+          path: test/.flatpak-builder
           key: ${{ runner.os }}-smplayer-build
 
       - name: Build
