@@ -49,7 +49,7 @@ jobs:
           path: ./smplayer.flatpak
 
       - name: Upload package to release
-        if: ${false}}
+        if: ${{false}}
         #if: github.event_name == 'release'
         uses: svenstaro/upload-release-action@v2
         with:
