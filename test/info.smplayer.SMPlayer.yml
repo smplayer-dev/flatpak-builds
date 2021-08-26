@@ -1,8 +1,8 @@
 app-id: info.smplayer.SMPlayer
-base: io.qt.qtwebkit.BaseApp
-base-version: '5.9'
+#base: io.qt.qtwebkit.BaseApp
+#base-version: '5.12'
 runtime: org.kde.Platform
-runtime-version: '5.9'
+runtime-version: '5.12'
 sdk: org.kde.Sdk
 rename-desktop-file: smplayer.desktop
 command: smplayer
@@ -23,31 +23,36 @@ modules:
       env:
         QMAKEPATH: /app/lib
     build-commands:
-      - ln -sf smtube-dir/src smtube
-      - cd smtube && lrelease smtube.pro && qmake DEFINES+="SMTUBE_LIB" && make -j$FLATPAK_BUILDER_N_JOBS
-      - cp smtube/translations/*.qm src/translations/
-      - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=USE_SHM DEFINES+=USE_SMTUBE_LIB" -j$FLATPAK_BUILDER_N_JOBS install
+      #- ln -sf smtube-dir/src smtube
+      #- cd smtube && lrelease smtube.pro && qmake DEFINES+="SMTUBE_LIB" && make -j$FLATPAK_BUILDER_N_JOBS
+      #- cp smtube/translations/*.qm src/translations/
+      - make PREFIX=/app QMAKE_OPTS="DEFINES+=NO_DEBUG_ON_CONSOLE DEFINES+=SIMPLE_BUILD DEFINES+=USE_SHM DEFINES+=USE_GL_WINDOW" -j$FLATPAK_BUILDER_N_JOBS install
       - mkdir -p /app/share/icons/hicolor/scalable/apps/
       - install -Dm644 icons/smplayer.svg
              /app/share/icons/hicolor/scalable/apps/info.smplayer.SMPlayer.svg
       - desktop-file-edit --set-icon=info.smplayer.SMPlayer
              /app/share/applications/smplayer.desktop
-      - mv /app/share/metainfo/smplayer.appdata.xml /app/share/metainfo/info.smplayer.SMPlayer.appdata.xml
+      #- mv /app/share/metainfo/smplayer.appdata.xml /app/share/metainfo/info.smplayer.SMPlayer.appdata.xml
+    post-install:
+      - install -D -m644 info.smplayer.SMPlayer.appdata.xml /app/share/appdata/info.smplayer.SMPlayer.appdata.xml
     sources:
       - type: git
         url: https://github.com/smplayer-dev/smplayer.git
-        tag: master
-        #tag: v21.8.0
+        #tag: master
+        tag: v21.8.0
         #commit: 0362b21519f69f1baa2525522b43f07134c57fd4
-        disable-shallow-clone: true
-      - type: git
-        url: https://github.com/smplayer-dev/smtube.git
-        tag: v21.7.0
-        commit: 1badaac1eaa40c104716cdf22333b0c17e31d982
-        dest: smtube-dir
+        #disable-shallow-clone: true
+      - type: file
+        path: info.smplayer.SMPlayer.appdata.xml
+      #- type: git
+      #  url: https://github.com/smplayer-dev/smtube.git
+      #  tag: v21.7.0
+      #  commit: 1badaac1eaa40c104716cdf22333b0c17e31d982
+      #  dest: smtube-dir
 
     modules:
       - name: mpv
+        #disabled: true
         cleanup:
           - /include
           - /lib/pkgconfig
@@ -166,7 +171,21 @@ modules:
                 url: https://github.com/fribidi/fribidi/releases/download/v1.0.5/fribidi-1.0.5.tar.bz2
                 sha256: 6a64f2a687f5c4f203a46fa659f43dd43d1f8b845df8d723107e8a7e6158e4ce
 
+      - name: mpv-bin
+        disabled: true
+        cleanup:
+          - /include
+          - /lib/pkgconfig
+          - /share/man
+        buildsystem: simple
+        build-commands:
+          - tar xvjf mpv_bin.tar.bz2 -C /
+        sources:
+          - type: file
+            path: mpv_bin.tar.bz2
+
       - name: mplayer
+        disabled: true
         buildsystem: simple
         build-options:
           arch:
