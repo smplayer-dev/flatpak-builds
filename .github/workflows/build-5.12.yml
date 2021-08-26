@@ -9,7 +9,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: bilelmoussaoui/flatpak-github-actions:kde-5.15
+      #image: bilelmoussaoui/flatpak-github-actions:kde-5.15
+      image: wachii/flatpak-kde:5.12
       options: --privileged
 
     steps:
