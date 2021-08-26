@@ -52,7 +52,7 @@ modules:
 
     modules:
       - name: mpv
-        disabled: true
+        #disabled: true
         cleanup:
           - /include
           - /lib/pkgconfig
