@@ -24,6 +24,7 @@ jobs:
 
       - name: Build
         run: |
+            cd test
             flatpak --user remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
             #flatpak install -y --user org.kde.Platform/x86_64/5.15 org.kde.Sdk/x86_64/5.15 io.qt.qtwebkit.BaseApp/x86_64/5.15
             flatpak install -y --user org.kde.Platform/x86_64/5.12 org.kde.Sdk/x86_64/5.12 io.qt.qtwebkit.BaseApp/x86_64/5.12
@@ -46,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: smplayer.flatpak
-          path: ./smplayer.flatpak
+          path: ./test/smplayer.flatpak
 
       - name: Upload package to release
         if: ${{false}}
