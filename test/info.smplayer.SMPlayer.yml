@@ -184,7 +184,7 @@ modules:
             path: mpv_bin.tar.bz2
 
       - name: mplayer
-        disabled: true
+        #disabled: true
         buildsystem: simple
         build-options:
           arch:
