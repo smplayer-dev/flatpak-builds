@@ -27,17 +27,17 @@ jobs:
       - name: Build
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
         with:
-          bundle: smplayer-${{env.VERSION}}${{matrix.config.tag}}.flatpak
+          bundle: smplayer-${{env.VERSION}}.flatpak
           manifest-path: test/info.smplayer.SMPlayer.yml
           cache: true
-          cache-key: smplayer-build-${{runner.os}}-${{matrix.config.name}}
+          cache-key: smplayer-build-${{runner.os}}
     
       - name: Upload package to release
         if: github.event_name == 'release'
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./smplayer-${{env.VERSION}}${{matrix.config.tag}}.flatpak
+          file: ./test/smplayer-${{env.VERSION}}.flatpak
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
