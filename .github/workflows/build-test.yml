@@ -8,7 +8,7 @@ jobs:
     container:
       #image: bilelmoussaoui/flatpak-github-actions:kde-5.15
       #image: fedora:latest
-      image: wachii/fedora-flatpak:base
+      image: wachii/fedora-flatpak-kde:5.12
       options: --privileged
 
     steps:
