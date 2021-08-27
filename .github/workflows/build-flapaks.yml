@@ -30,7 +30,12 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
-        
+
+      - name: Patch
+        if: ${{matrix.config.sdk == '5.15'}}
+        working-directory: '5.15'
+        run: sed -e 's/NO_DEBUG_ON_CONSOLE/NO_DEBUG_ON_CONSOLE DEFINES+=USE_GL_WINDOW/' -i info.smplayer.SMPlayer.yml
+
       - name: Build
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
         with:
