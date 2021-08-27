@@ -1,0 +1,50 @@
+name: Build flatpak packages
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { sdk: '5.15', image: 'bilelmoussaoui/flatpak-github-actions:kde-5.15'}
+          - { sdk: '5.12', image: 'wachii/flatpak-kde:5.12' }
+
+    runs-on: ubuntu-20.04
+    container:
+      image: ${{matrix.config.image}}
+      options: --privileged
+
+    steps:
+      - name: Get version
+        run: |
+            git clone https://github.com/smplayer-dev/smplayer.git
+            cd smplayer
+            ./get_version.sh
+            VERSION=`cat version`
+            echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Build
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
+        with:
+          bundle: smplayer-${{env.VERSION}}-${{matrix.config.sdk}}.flatpak
+          manifest-path: ${{matrix.config.sdk}}/info.smplayer.SMPlayer.yml
+          cache: true
+          cache-key: smplayer-build-${{runner.os}}-${{matrix.config.sdk}}
+    
+      - name: Upload package to release
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ./${{matrix.config.sdk}}/smplayer-*.flatpak
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
