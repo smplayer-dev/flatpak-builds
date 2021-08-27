@@ -20,6 +20,6 @@ jobs:
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
         with:
           bundle: test.flatpak
-          manifest-path: 5.12/info.smplayer.Test.yml
+          manifest-path: 5.12/info.smplayer.SMPlayer.yml
           cache: true
           cache-key: smplayer-build-${{runner.os}}-5.12
