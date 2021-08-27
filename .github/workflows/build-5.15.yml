@@ -33,6 +33,7 @@ jobs:
 
       - name: Patch
         if: ${{matrix.config.name == 'opengl'}}
+        working-directory: '5.15'
         run: sed -e 's/NO_DEBUG_ON_CONSOLE/NO_DEBUG_ON_CONSOLE ${{matrix.config.options}}/' -i info.smplayer.SMPlayer.yml
         
       - name: Build
