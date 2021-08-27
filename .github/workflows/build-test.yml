@@ -18,8 +18,8 @@ jobs:
         run: |
            #sudo apt-get -y install flatpak flatpak-builder
            #sudo flatpak --system remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-           sudo dnf update -y
-           sudo dnf install -y flatpak flatpak-builder
+           #sudo dnf update -y
+           sudo dnf install -y flatpak flatpak-builder python3-aiohttp python3-tenacity python3-gobject xorg-x11-server-Xvfb ccache zstd
            sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
       - name: Build
