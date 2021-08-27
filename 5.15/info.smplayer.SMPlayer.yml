@@ -62,9 +62,9 @@ modules:
         sources:
           - type: git
             url: 'https://github.com/smplayer-dev/mpv-mod.git'
-            tag: 'main'
-            #tag: v0.33.1-58
-            #commit: cf077ab770e4d839380f5797b4c164874aa6fb21
+            #tag: 'main'
+            tag: v0.33.1-58
+            commit: cf077ab770e4d839380f5797b4c164874aa6fb21
           - type: file
             url: 'https://waf.io/waf-2.0.21'
             sha256: '7cebf2c5efe53cbb9a4b5bdc4b49ae90ecd64a8fce7a3222d58e591b58215306'
@@ -186,9 +186,9 @@ modules:
         sources:
           - type: git
             url: https://github.com/smplayer-dev/mplayer-mod.git
-            tag: 'main'
-            #tag: v1.4-83
-            #commit: 09c649e889bf2345f1558427b4557fb0b656ef07
+            #tag: 'main'
+            tag: v1.4-83
+            commit: 09c649e889bf2345f1558427b4557fb0b656ef07
 
       - name: smplayer-skins
         buildsystem: simple
