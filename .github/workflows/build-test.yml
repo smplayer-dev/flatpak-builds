@@ -5,9 +5,10 @@ on: [workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
-    #container:
+    container:
     #  image: bilelmoussaoui/flatpak-github-actions:kde-5.15
-    #  options: --privileged
+      image: fedora:latest
+      options: --privileged
 
     steps:
       - name: Checkout
@@ -15,8 +16,11 @@ jobs:
 
       - name: Install flatpak
         run: |
-           sudo apt-get -y install flatpak flatpak-builder
-           sudo flatpak --system remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+           #sudo apt-get -y install flatpak flatpak-builder
+           #sudo flatpak --system remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+           sudo dnf update -y
+           sudo dnf install -y flatpak flatpak-builder
+           sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
       - name: Build
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
