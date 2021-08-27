@@ -1,4 +1,4 @@
-name: Build flatpak package
+name: Build flatpak package (5.15)
 
 on:
   workflow_dispatch:
@@ -38,8 +38,8 @@ jobs:
       - name: Build
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
         with:
-          bundle: smplayer-${{env.VERSION}}${{matrix.config.tag}}.flatpak
-          manifest-path: info.smplayer.SMPlayer.yml
+          bundle: smplayer-${{env.VERSION}}${{matrix.config.tag}}-5.15.flatpak
+          manifest-path: 5.15/info.smplayer.SMPlayer.yml
           cache: true
           cache-key: smplayer-build-${{runner.os}}-${{matrix.config.name}}
     
@@ -48,7 +48,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./smplayer-${{env.VERSION}}${{matrix.config.tag}}.flatpak
+          file: ./5.15/smplayer-*.flatpak
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
