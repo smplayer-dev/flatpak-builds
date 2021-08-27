@@ -32,7 +32,10 @@ jobs:
           manifest-path: 5.12/info.smplayer.SMPlayer.yml
           cache: true
           cache-key: smplayer-build-${{runner.os}}
-    
+
+      - name: List
+        run: flatpak list
+
       - name: Upload package to release
         if: github.event_name == 'release'
         uses: svenstaro/upload-release-action@v2
