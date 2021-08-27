@@ -6,8 +6,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-    #  image: bilelmoussaoui/flatpak-github-actions:kde-5.15
-      image: fedora:latest
+      #image: bilelmoussaoui/flatpak-github-actions:kde-5.15
+      #image: fedora:latest
+      image: wachii/fedora-flatpak:base
       options: --privileged
 
     steps:
@@ -15,6 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install flatpak
+        if: ${{false}}
         run: |
            #sudo apt-get -y install flatpak flatpak-builder
            #sudo flatpak --system remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
