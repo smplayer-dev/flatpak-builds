@@ -38,15 +38,15 @@ modules:
     sources:
       - type: git
         url: https://github.com/smplayer-dev/smplayer.git
-        #tag: master
-        tag: v21.8.0
+        tag: master
+        #tag: v21.8.0
         #commit: 0362b21519f69f1baa2525522b43f07134c57fd4
         #disable-shallow-clone: true
       #- type: file
       #  path: info.smplayer.SMPlayer.appdata.xml
       - type: git
         url: https://github.com/smplayer-dev/smtube.git
-        tag: v21.7.0
+        #tag: v21.7.0
         commit: 1badaac1eaa40c104716cdf22333b0c17e31d982
         dest: smtube-dir
 
