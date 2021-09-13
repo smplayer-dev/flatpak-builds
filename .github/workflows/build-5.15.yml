@@ -2,8 +2,8 @@ name: Build flatpak package (5.15)
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
+  #release:
+  #  types: [published]
 
 jobs:
   build:
