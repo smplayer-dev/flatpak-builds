@@ -41,7 +41,7 @@ modules:
         tag: master
         #tag: v21.8.0
         #commit: 0362b21519f69f1baa2525522b43f07134c57fd4
-        #disable-shallow-clone: true
+        disable-shallow-clone: true
       #- type: file
       #  path: info.smplayer.SMPlayer.appdata.xml
       - type: git
