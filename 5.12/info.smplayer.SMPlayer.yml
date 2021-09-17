@@ -228,3 +228,10 @@ modules:
             url: https://sourceforge.net/projects/smplayer/files/SMPlayer-themes/20.11.0/smplayer-themes-20.11.0.tar.bz2
             sha256: b99c02a13e5587e0c59d127d2f2536a1bc2740e726fadb47c89d349df5951132
 
+      - name: qt-translations
+        buildsystem: simple
+        build-commands:
+          - tar xf qt512-translations.tar.bz2 -C /usr/translations
+        sources:
+          - type: file
+            path: qt512-translations.tar.bz2
