@@ -231,6 +231,7 @@ modules:
       - name: qt-translations
         buildsystem: simple
         build-commands:
+          - mkdir -p /app/share/smplayer/translations
           - tar xf qt512-translations.tar.bz2 -C /app/share/smplayer/translations
         sources:
           - type: file
