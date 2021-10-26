@@ -42,8 +42,8 @@ modules:
         disable-shallow-clone: true
       - type: git
         url: https://github.com/smplayer-dev/smtube.git
-        #tag: v21.7.0
-        commit: 1badaac1eaa40c104716cdf22333b0c17e31d982
+        tag: v21.10.0
+        commit: aecd6668b6e3114eec4da7b14fd933c46f1f27af
         dest: smtube-dir
 
     modules:
