@@ -1,0 +1,28 @@
+name: Build SMPlayer 21.10
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    container:
+      image: wachii/fedora-flatpak-kde:5.12
+      options: --privileged
+
+    steps:
+      - name: Get version
+        run: |
+            VERSION=21.10.0
+            echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
+        with:
+          bundle: smplayer-${{env.VERSION}}.flatpak
+          manifest-path: releases/21.10/info.smplayer.SMPlayer.yml
+          #cache: true
+          #cache-key: smplayer-build-${{runner.os}}-stable
