@@ -1,4 +1,4 @@
-name: Build SMPlayer stable
+name: Build SMPlayer 21.8
 
 on:
   workflow_dispatch:
@@ -15,10 +15,6 @@ jobs:
     steps:
       - name: Get version
         run: |
-            #git clone https://github.com/smplayer-dev/smplayer.git
-            #cd smplayer
-            #./get_version.sh
-            #VERSION=`cat version`
             VERSION=21.8.0
             echo "VERSION=$VERSION" >> $GITHUB_ENV
 
@@ -29,16 +25,6 @@ jobs:
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
         with:
           bundle: smplayer-${{env.VERSION}}.flatpak
-          manifest-path: smplayer-21.8/info.smplayer.SMPlayer.yml
+          manifest-path: releases/21.8/info.smplayer.SMPlayer.yml
           cache: true
           cache-key: smplayer-build-${{runner.os}}-stable
-    
-      - name: Upload package to release
-        if: github.event_name == 'release'
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ./smplayer-${{env.VERSION}}.flatpak
-          tag: ${{ github.ref }}
-          overwrite: true
-          file_glob: true
