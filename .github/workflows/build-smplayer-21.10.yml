@@ -5,6 +5,11 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        arch: [x86_64, aarch64]
+      fail-fast: false
+
     runs-on: ubuntu-20.04
     container:
       image: wachii/fedora-flatpak-kde:5.12
@@ -19,10 +24,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install deps
+        if: ${{ matrix.arch == 'aarch64'}}
+        run: dnf -y install docker
+
+      - name: Set up QEMU
+        if: ${{ matrix.arch == 'aarch64'}}
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: arm64
+
       - name: Build
-        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
         with:
           bundle: smplayer-${{env.VERSION}}.flatpak
           manifest-path: releases/21.10/info.smplayer.SMPlayer.yml
-          #cache: true
-          #cache-key: smplayer-build-${{runner.os}}-stable
+          cache: true
+          cache-key: smplayer-build-${{runner.os}}-21.10
+          arch: ${{ matrix.arch }}
