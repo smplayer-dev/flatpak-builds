@@ -11,8 +11,9 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { name: 'normal', tag: '-noopengl', options: ''}
-          - { name: 'opengl', tag: '', options: 'DEFINES+=USE_GL_WINDOW' }
+          - { name: 'normal', tag: '-noopengl', options: '', arch: 'x86_64'}
+          - { name: 'opengl', tag: '', options: 'DEFINES+=USE_GL_WINDOW', arch: 'x86_64' }
+          #- { name: 'opengl', tag: '', options: 'DEFINES+=USE_GL_WINDOW', arch: 'aarch64' }
 
     runs-on: ubuntu-latest
     container:
@@ -31,18 +32,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Install deps
+        if: ${{ matrix.config.arch == 'aarch64'}}
+        run: dnf -y install docker
+
+      - name: Set up QEMU
+        if: ${{ matrix.config.arch == 'aarch64'}}
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+        with:
+          platforms: arm64
+
       - name: Patch
         if: ${{matrix.config.name == 'opengl'}}
         working-directory: '5.15'
         run: sed -e 's/USE_SHM/USE_SHM ${{matrix.config.options}}/' -i info.smplayer.SMPlayer.yml
         
       - name: Build
-        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
         with:
           bundle: smplayer-${{env.VERSION}}${{matrix.config.tag}}-5.15.flatpak
           manifest-path: 5.15/info.smplayer.SMPlayer.yml
           cache: true
-          cache-key: smplayer-build-${{runner.os}}-${{matrix.config.name}}
+          cache-key: smplayer-build-${{runner.os}}-${{matrix.config.name}}-${{matrix.config.arch}}
+          arch: ${{matrix.config.arch}}
     
       - name: Upload package to release
         if: github.event_name == 'release'
