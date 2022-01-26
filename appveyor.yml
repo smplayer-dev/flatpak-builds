@@ -1,0 +1,29 @@
+version: 1.0-{build}-{branch}
+image: Ubuntu2004
+
+install: |-
+  export DEBIAN_FRONTEND="noninteractive"
+  sudo apt-get -y update
+  sudo apt-get install -y flatpak flatpak-builder
+  flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+build_script: |-
+  cd 5.15
+  flatpak-builder -y --user --install-deps-from=flathub --install-deps-only build-dir/ info.smplayer.SMPlayer.yml
+  flatpak-builder --repo=repo --install --user build-dir/ info.smplayer.SMPlayer.yml
+  flatpak build-bundle repo smplayer.flatpak info.smplayer.SMPlayer
+  ls -l
+
+after_build: |-
+  mv smplayer.flatpak ..
+  rm -rf .flatpak-builder
+  rm -rf build-dir
+
+artifacts:
+  - path: smplayer.flatpak
+    name: smplayer.flatpak
+
+cache:
+  #- 5.15/build-dir
+  #- 5.15/repo
+  #- ~/.local/share/flatpak/
