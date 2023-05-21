@@ -171,8 +171,10 @@ modules:
     sources:
       - type: git
         url: 'https://github.com/smplayer-dev/mpv.git'
-        tag: 'v0.34.0-mod'
-        commit: db6dbb3c077f8a49f2c544fea815266238d2f93c
+        #tag: 'v0.34.0-mod'
+        #commit: db6dbb3c077f8a49f2c544fea815266238d2f93c
+        branch: 'mod-0.35.1'
+        commit: beb89e7d2306e8ed0cc67105b0f3a7466a94a96f
       - type: file
         url: https://waf.io/waf-2.0.21
         sha256: '7cebf2c5efe53cbb9a4b5bdc4b49ae90ecd64a8fce7a3222d58e591b58215306'
