@@ -49,6 +49,17 @@ modules:
         url: 'https://github.com/ytdl-org/youtube-dl/archive/2021.04.26.tar.gz'
         sha256: 'd80023ab221b3cb89229b632e247035a22c5afaee9a7b3c653bbd702f71c1083'
 
+  - name: libXpresent
+    buildsystem: autotools
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/xorg/lib/libxpresent.git
+        tag: libXpresent-1.0.1
+        commit: 37507b5f44332accfb1064ee69a4f6a833994747
+        x-checker-data:
+          type: git
+          tag-pattern: ^libXpresent-([\d.]+)$
+          
   - name: uchardet
     buildsystem: cmake-ninja
     config-opts:
