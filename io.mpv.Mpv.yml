@@ -163,23 +163,21 @@ modules:
       - "/include"
       - "/lib/pkgconfig"
     build-commands:
-      - python3 waf configure --prefix=/app
-                              --enable-libmpv-shared
-                              --disable-alsa
-                              --enable-sdl2
-                              --enable-libarchive
-                              --enable-gl-x11
+      - python3 waf configure --prefix=/app --enable-gl-x11
       - python3 waf build
       - python3 waf install
     post-install:
       - install -D -m644 io.mpv.Mpv.appdata.xml /app/share/appdata/io.mpv.Mpv.appdata.xml
     sources:
       - type: archive
-        url: https://github.com/mpv-player/mpv/archive/v0.33.1.tar.gz
-        sha256: 100a116b9f23bdcda3a596e9f26be3a69f166a4f1d00910d1789b6571c46f3a9
+        #url: https://github.com/mpv-player/mpv/archive/v0.33.1.tar.gz
+        #sha256: 100a116b9f23bdcda3a596e9f26be3a69f166a4f1d00910d1789b6571c46f3a9
+        url: 'https://github.com/smplayer-dev/mpv.git'
+        tag: 'v0.34.0-mod'
+        commit: db6dbb3c077f8a49f2c544fea815266238d2f93c
       - type: file
-        url: https://waf.io/waf-2.0.17
-        sha256: e05a7f0e81dc3af7e744ddf7c7a334e3504967108fe51fab45808015ba1c0de0
+        url: https://waf.io/waf-2.0.21
+        sha256: '7cebf2c5efe53cbb9a4b5bdc4b49ae90ecd64a8fce7a3222d58e591b58215306'
         dest-filename: waf
       - type: file
         path: io.mpv.Mpv.appdata.xml
