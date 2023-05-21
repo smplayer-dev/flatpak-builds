@@ -169,9 +169,7 @@ modules:
     post-install:
       - install -D -m644 io.mpv.Mpv.appdata.xml /app/share/appdata/io.mpv.Mpv.appdata.xml
     sources:
-      - type: archive
-        #url: https://github.com/mpv-player/mpv/archive/v0.33.1.tar.gz
-        #sha256: 100a116b9f23bdcda3a596e9f26be3a69f166a4f1d00910d1789b6571c46f3a9
+      - type: git
         url: 'https://github.com/smplayer-dev/mpv.git'
         tag: 'v0.34.0-mod'
         commit: db6dbb3c077f8a49f2c544fea815266238d2f93c
