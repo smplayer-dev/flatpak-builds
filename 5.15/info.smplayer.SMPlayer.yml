@@ -63,14 +63,24 @@ modules:
           - type: git
             url: 'https://github.com/smplayer-dev/mpv-mod.git'
             #tag: 'main'
-            tag: v0.33.1-58
-            commit: cf077ab770e4d839380f5797b4c164874aa6fb21
+            #tag: v0.33.1-58
+            #commit: cf077ab770e4d839380f5797b4c164874aa6fb21
+            branch: 'mod-0.35.1'
+            commit: beb89e7d2306e8ed0cc67105b0f3a7466a94a96f
           - type: file
             url: 'https://waf.io/waf-2.0.21'
             sha256: '7cebf2c5efe53cbb9a4b5bdc4b49ae90ecd64a8fce7a3222d58e591b58215306'
             dest-filename: waf
 
         modules:
+          - name: libXpresent
+            buildsystem: autotools
+            sources:
+              - type: git
+                url: https://gitlab.freedesktop.org/xorg/lib/libxpresent.git
+                tag: libXpresent-1.0.1
+                commit: 37507b5f44332accfb1064ee69a4f6a833994747
+        
           - name: luajit
             no-autogen: true
             cleanup:
