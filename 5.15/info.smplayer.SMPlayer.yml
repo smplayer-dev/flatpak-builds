@@ -190,6 +190,7 @@ modules:
                         --disable-ffmpeg_a
                         --disable-gui
                         --disable-mencoder
+                        --extra-libs-mplayer=-lrt
                         --yasm=''
                         $ENABLE_RUNTIME_CPUDETECTION
           - make -j$FLATPAK_BUILDER_N_JOBS
@@ -198,8 +199,10 @@ modules:
           - type: git
             url: https://github.com/smplayer-dev/mplayer-mod.git
             #tag: 'main'
-            tag: v1.4-83
-            commit: 09c649e889bf2345f1558427b4557fb0b656ef07
+            #tag: v1.4-83
+            #commit: 09c649e889bf2345f1558427b4557fb0b656ef07
+            tag: v1.5-110
+            commit: ea47c72e2b91a0a42fd2723f075bd7adb43ec55a
 
       - name: smplayer-skins
         buildsystem: simple
