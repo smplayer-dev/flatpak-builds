@@ -190,8 +190,6 @@ modules:
           - ./configure --prefix=/app
                         --disable-gui
                         --disable-mencoder
-                        --disable-libmpeg2-internal
-                        --disable-ffmpeg_a
                         --extra-libs-mplayer=-lrt
                         --yasm=''
                         $ENABLE_RUNTIME_CPUDETECTION
