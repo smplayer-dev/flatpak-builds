@@ -186,8 +186,8 @@ modules:
                 ENABLE_RUNTIME_CPUDETECTION: --enable-runtime-cpudetection
         build-commands:
           - ./configure --prefix=/app
-                        --disable-libmpeg2-internal
-                        --disable-ffmpeg_a
+                        #--disable-libmpeg2-internal
+                        #--disable-ffmpeg_a
                         --disable-gui
                         --disable-mencoder
                         --extra-libs-mplayer=-lrt
