@@ -67,7 +67,7 @@ modules:
             #commit: cf077ab770e4d839380f5797b4c164874aa6fb21
             url: 'https://github.com/smplayer-dev/mpv.git'
             branch: 'mod-0.35.1'
-            commit: beb89e7d2306e8ed0cc67105b0f3a7466a94a96f
+            commit: be328ae50e48aab2b7de6f775f820a1383039b22
           - type: file
             url: 'https://waf.io/waf-2.0.21'
             sha256: '7cebf2c5efe53cbb9a4b5bdc4b49ae90ecd64a8fce7a3222d58e591b58215306'
