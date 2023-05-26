@@ -138,7 +138,7 @@ modules:
                 #url: 'https://ffmpeg.org/releases/ffmpeg-4.4.tar.xz'
                 #sha256: '06b10a183ce5371f915c6bb15b7b1fffbe046e8275099c96affc29e17645d909'
                 url: 'https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz'
-                sha254: '57be87c22d9b49c112b6d24bc67d42508660e6b718b3db89c44e47e289137082'
+                sha256: '57be87c22d9b49c112b6d24bc67d42508660e6b718b3db89c44e47e289137082'
 
           - name: libass
             cleanup:
