@@ -79,14 +79,24 @@ modules:
             #tag: v0.33.1-58
             #commit: cf077ab770e4d839380f5797b4c164874aa6fb21
             url: 'https://github.com/smplayer-dev/mpv.git'
-            tag: 'v0.34.0-mod'
-            commit: db6dbb3c077f8a49f2c544fea815266238d2f93c
+            #tag: 'v0.34.0-mod'
+            #commit: db6dbb3c077f8a49f2c544fea815266238d2f93c
+            branch: 'mod-0.35.1'
+            commit: be328ae50e48aab2b7de6f775f820a1383039b22
           - type: file
             url: 'https://waf.io/waf-2.0.21'
             sha256: '7cebf2c5efe53cbb9a4b5bdc4b49ae90ecd64a8fce7a3222d58e591b58215306'
             dest-filename: waf
 
         modules:
+          - name: libXpresent
+            buildsystem: autotools
+            sources:
+              - type: git
+                url: https://gitlab.freedesktop.org/xorg/lib/libxpresent.git
+                tag: libXpresent-1.0.1
+                commit: 37507b5f44332accfb1064ee69a4f6a833994747
+
           - name: luajit
             no-autogen: true
             cleanup:
@@ -140,15 +150,10 @@ modules:
               - '--enable-libwebp'
             sources:
               - type: archive
-                url: 'https://ffmpeg.org/releases/ffmpeg-4.4.tar.xz'
-                sha256: '06b10a183ce5371f915c6bb15b7b1fffbe046e8275099c96affc29e17645d909'
-            modules:
-              - name: dav1d
-                buildsystem: meson
-                sources:
-                 - type: archive
-                   url: https://code.videolan.org/videolan/dav1d/-/archive/0.9.0/dav1d-0.9.0.tar.gz
-                   sha256: 'ad6b89340f6e1a5c0c043763c0e28bb42d8930426f7dec049a8bc5e70076dd1a'
+                #url: 'https://ffmpeg.org/releases/ffmpeg-4.4.tar.xz'
+                #sha256: '06b10a183ce5371f915c6bb15b7b1fffbe046e8275099c96affc29e17645d909'
+                url: 'https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz'
+                sha256: '57be87c22d9b49c112b6d24bc67d42508660e6b718b3db89c44e47e289137082'
 
           - name: libass
             cleanup:
@@ -212,10 +217,9 @@ modules:
                 ENABLE_RUNTIME_CPUDETECTION: --enable-runtime-cpudetection
         build-commands:
           - ./configure --prefix=/app
-                        --disable-libmpeg2-internal
-                        --disable-ffmpeg_a
                         --disable-gui
                         --disable-mencoder
+                        --extra-libs-mplayer=-lrt
                         --yasm=''
                         $ENABLE_RUNTIME_CPUDETECTION
           - make -j$FLATPAK_BUILDER_N_JOBS
@@ -224,8 +228,10 @@ modules:
           - type: git
             url: https://github.com/smplayer-dev/mplayer-mod.git
             #tag: 'main'
-            tag: v1.4-83
-            commit: 09c649e889bf2345f1558427b4557fb0b656ef07
+            #tag: v1.4-83
+            #commit: 09c649e889bf2345f1558427b4557fb0b656ef07
+            tag: v1.5-110
+            commit: ea47c72e2b91a0a42fd2723f075bd7adb43ec55a
 
       - name: smplayer-skins
         buildsystem: simple
