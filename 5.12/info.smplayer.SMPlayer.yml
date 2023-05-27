@@ -154,6 +154,13 @@ modules:
                 #sha256: '06b10a183ce5371f915c6bb15b7b1fffbe046e8275099c96affc29e17645d909'
                 url: 'https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz'
                 sha256: '57be87c22d9b49c112b6d24bc67d42508660e6b718b3db89c44e47e289137082'
+            modules:
+              - name: dav1d
+                buildsystem: meson
+                sources:
+                 - type: archive
+                   url: https://code.videolan.org/videolan/dav1d/-/archive/0.9.0/dav1d-0.9.0.tar.gz
+                   sha256: 'ad6b89340f6e1a5c0c043763c0e28bb42d8930426f7dec049a8bc5e70076dd1a'
 
           - name: libass
             cleanup:
