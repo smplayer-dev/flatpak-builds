@@ -67,7 +67,7 @@ modules:
             #tag: v0.33.1-58
             #commit: cf077ab770e4d839380f5797b4c164874aa6fb21
             url: 'https://github.com/smplayer-dev/mpv.git'
-            branch: 'mod-0.35.1'
+            #branch: 'mod-0.35.1'
             #commit: be328ae50e48aab2b7de6f775f820a1383039b22
             tag: 0.35.1-mod2
             commit: 88cf349b20f87d6ef8e8795bece147316ad1149c
