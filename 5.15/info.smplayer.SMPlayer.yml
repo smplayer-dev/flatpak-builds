@@ -61,16 +61,19 @@ modules:
           - python3 waf build
           - python3 waf install
         sources:
-          - type: git
+          #- type: git
             #url: 'https://github.com/smplayer-dev/mpv-mod.git'
             #tag: 'main'
             #tag: v0.33.1-58
             #commit: cf077ab770e4d839380f5797b4c164874aa6fb21
-            url: 'https://github.com/smplayer-dev/mpv.git'
+            #url: 'https://github.com/smplayer-dev/mpv.git'
             #branch: 'mod-0.35.1'
             #commit: be328ae50e48aab2b7de6f775f820a1383039b22
-            tag: v0.35.1-mod2
-            commit: 8fc8ee76e82865a0a94f6d33ff9305ead0a6c03a
+            #tag: v0.35.1-mod2
+            #commit: 8fc8ee76e82865a0a94f6d33ff9305ead0a6c03a
+          - type: archive
+            url: https://github.com/smplayer-dev/mpv/releases/download/v0.35.1-mod-2/mpv-mod-src-0.35.1.tar.gz
+            sha256: 'c211f0db98af0fcec72ce52ea983fcd7e12d69027ee43fd20191a798da40c6bc'
           - type: file
             url: 'https://waf.io/waf-2.0.21'
             sha256: '7cebf2c5efe53cbb9a4b5bdc4b49ae90ecd64a8fce7a3222d58e591b58215306'
