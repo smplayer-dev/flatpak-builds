@@ -71,7 +71,7 @@ modules:
             #commit: be328ae50e48aab2b7de6f775f820a1383039b22
             #tag: v0.35.1-mod2
             #commit: 8fc8ee76e82865a0a94f6d33ff9305ead0a6c03a
-            branch: 'master'
+            #branch: 'master'
             tag: v0.36.0
             commit: ca9dd6d18b7832127a8158950c8c2c2138225e5e
           #- type: archive
