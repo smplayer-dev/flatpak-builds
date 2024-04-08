@@ -23,10 +23,11 @@ modules:
       env:
         QMAKEPATH: /app/lib
     build-commands:
-      - ln -sf smtube-dir/src smtube
-      - cd smtube && lrelease smtube.pro && qmake DEFINES+="SMTUBE_LIB" && make -j$FLATPAK_BUILDER_N_JOBS
-      - cp smtube/translations/*.qm src/translations/
-      - make PREFIX=/app QMAKE_OPTS="DEFINES+=USE_SHM DEFINES+=USE_GL_WINDOW DEFINES+=USE_SMTUBE_LIB" -j$FLATPAK_BUILDER_N_JOBS install
+      #- ln -sf smtube-dir/src smtube
+      #- cd smtube && lrelease smtube.pro && qmake DEFINES+="SMTUBE_LIB" && make -j$FLATPAK_BUILDER_N_JOBS
+      #- cp smtube/translations/*.qm src/translations/
+      #- make PREFIX=/app QMAKE_OPTS="DEFINES+=USE_SHM DEFINES+=USE_GL_WINDOW DEFINES+=USE_SMTUBE_LIB" -j$FLATPAK_BUILDER_N_JOBS install
+      - make PREFIX=/app QMAKE_OPTS="DEFINES+=USE_SHM DEFINES+=USE_GL_WINDOW" -j$FLATPAK_BUILDER_N_JOBS install
       - mkdir -p /app/share/icons/hicolor/scalable/apps/
       - install -Dm644 icons/smplayer.svg
              /app/share/icons/hicolor/scalable/apps/info.smplayer.SMPlayer.svg
@@ -44,11 +45,11 @@ modules:
         disable-shallow-clone: true
       #- type: file
       #  path: info.smplayer.SMPlayer.appdata.xml
-      - type: git
-        url: https://github.com/smplayer-dev/smtube.git
-        tag: v21.10.0
-        commit: aecd6668b6e3114eec4da7b14fd933c46f1f27af
-        dest: smtube-dir
+      #- type: git
+      #  url: https://github.com/smplayer-dev/smtube.git
+      #  tag: v21.10.0
+      #  commit: aecd6668b6e3114eec4da7b14fd933c46f1f27af
+      #  dest: smtube-dir
 
     modules:
       - name: qt-translations
