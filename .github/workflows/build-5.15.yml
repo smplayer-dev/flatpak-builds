@@ -12,12 +12,12 @@ jobs:
       matrix:
         config:
           - { name: 'normal', tag: '-noopengl', options: '', arch: 'x86_64'}
-          - { name: 'opengl', tag: '', options: 'DEFINES+=USE_GL_WINDOW', arch: 'x86_64' }
+          #- { name: 'opengl', tag: '', options: 'DEFINES+=USE_GL_WINDOW', arch: 'x86_64' }
           #- { name: 'opengl', tag: '', options: 'DEFINES+=USE_GL_WINDOW', arch: 'aarch64' }
 
     runs-on: ubuntu-latest
     container:
-      image: bilelmoussaoui/flatpak-github-actions:kde-5.15-24.08
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-5.15-24.08
       options: --privileged
 
     steps:
