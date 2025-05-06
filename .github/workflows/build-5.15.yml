@@ -17,7 +17,7 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-      image: bilelmoussaoui/flatpak-github-actions:kde-5.15-21.08
+      image: bilelmoussaoui/flatpak-github-actions:kde-5.15-24.08
       options: --privileged
 
     steps:
