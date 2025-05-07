@@ -13,13 +13,6 @@ finish-args:
   - '--filesystem=host'
   - '--talk-name=org.freedesktop.ScreenSaver'
   - '--own-name=org.mpris.MediaPlayer2.smplayer'
-add-extensions:
-  org.freedesktop.Platform.ffmpeg-full:
-    version: '24.08'
-    directory: lib/ffmpeg
-    add-ld-path: .
-cleanup-commands:
-  - mkdir -p ${FLATPAK_DEST}/lib/ffmpeg
 
 modules:
   - name: smplayer
@@ -62,7 +55,7 @@ modules:
           - /share/applications
         buildsystem: meson
         config-opts:
-          #- -Dlibmpv=true
+          - -Dlibmpv=false
           - -Dlua=enabled
           - -Ddebug=false
           - -Dbuild-date=false
@@ -74,6 +67,58 @@ modules:
             sha256: 10a0f4654f62140a6dd4d380dcf0bbdbdcf6e697556863dc499c296182f081a3
 
         modules:
+          - name: libass
+            cleanup:
+              - /include
+              - /lib/*.la
+              - /lib/pkgconfig
+            config-opts:
+              - '--disable-static'
+            sources:
+              - type: archive
+                url: 'https://github.com/libass/libass/releases/download/0.15.0/libass-0.15.0.tar.gz'
+                sha256: '9cbddee5e8c87e43a5fe627a19cd2aa4c36552156eb4edcf6c5a30bd4934fe58'
+
+          - name: ffmpeg
+            cleanup:
+              - /include
+              - /lib/pkgconfig
+              - /share/ffmpeg/examples
+            config-opts:
+              - --disable-debug
+              - --disable-doc
+              - --disable-static
+              - --enable-encoder=png
+              - --enable-gnutls
+              - --enable-gpl
+              - --enable-shared
+              - --enable-version3
+              - --enable-libaom
+              - --enable-libass
+              #- --enable-libbs2b
+              - --enable-libdav1d
+              - --enable-libfreetype
+              - --enable-libmp3lame
+              - --enable-libopus
+              - --enable-libjxl
+              #- --enable-libmysofa
+              - --enable-libtheora
+              - --enable-libv4l2
+              - --enable-libvorbis
+              - --enable-libvpx
+              #- --enable-libx264
+              #- --enable-libx265
+              - --enable-libwebp
+              #- --enable-libsmbclient
+              - --enable-libxml2
+              - --enable-vulkan
+              - --enable-libdrm
+              - --enable-vaapi
+            sources:
+              - type: archive
+                url: 'https://ffmpeg.org/releases/ffmpeg-7.1.tar.xz'
+                sha256: '40973d44970dbc83ef302b0609f2e74982be2d85916dd2ee7472d30678a7abe6'
+
           - name: libXpresent
             buildsystem: autotools
             sources:
@@ -109,13 +154,10 @@ modules:
               - /lib/pkgconfig
               - /share/man
             sources:
-              #- type: archive
-              #  url: 'http://luajit.org/download/LuaJIT-2.1.0-beta3.tar.gz'
-              #  sha256: '1ad2e34b111c802f9d0cdf019e986909123237a28c746b21295b63c9e785d9c3'
               - type: git
                 url: https://github.com/LuaJIT/LuaJIT.git
                 disable-shallow-clone: true
-                commit: 97813fb924edf822455f91a5fbbdfdb349e5984f
+                commit: eec7a8016c3381b949b5d84583800d05897fa960
               - type: shell
                 commands:
                   - sed -i 's|/usr/local|/app|' ./Makefile
@@ -130,50 +172,6 @@ modules:
               - type: archive
                 url: 'https://github.com/FFmpeg/nv-codec-headers/releases/download/n11.0.10.0/nv-codec-headers-11.0.10.0.tar.gz'
                 sha256: 'e5d1fe6b18254a3c8747a38714564030e4fda506961a11a7eafb94f2400419bb'
-
-          - name: ffmpeg
-            disabled: true
-            cleanup:
-              - /include
-              - /lib/pkgconfig
-              - /share/ffmpeg/examples
-            config-opts:
-              - '--enable-shared'
-              - '--disable-static'
-              - '--enable-gnutls'
-              - '--enable-gpl'
-              - '--disable-doc'
-              - '--disable-programs'
-              - '--disable-encoders'
-              - '--disable-muxers'
-              - '--enable-encoder=png,libwebp'
-              - '--enable-libv4l2'
-              - '--enable-libdav1d'
-              - '--enable-libfontconfig'
-              - '--enable-libfreetype'
-              - '--enable-libopus'
-              - '--enable-librsvg'
-              - '--enable-libvpx'
-              - '--enable-libmp3lame'
-              - '--enable-libwebp'
-            sources:
-              - type: archive
-                #url: 'https://ffmpeg.org/releases/ffmpeg-4.4.tar.xz'
-                #sha256: '06b10a183ce5371f915c6bb15b7b1fffbe046e8275099c96affc29e17645d909'
-                url: 'https://ffmpeg.org/releases/ffmpeg-6.0.tar.xz'
-                sha256: '57be87c22d9b49c112b6d24bc67d42508660e6b718b3db89c44e47e289137082'
-
-          - name: libass
-            cleanup:
-              - /include
-              - /lib/*.la
-              - /lib/pkgconfig
-            config-opts:
-              - '--disable-static'
-            sources:
-              - type: archive
-                url: 'https://github.com/libass/libass/releases/download/0.15.0/libass-0.15.0.tar.gz'
-                sha256: '9cbddee5e8c87e43a5fe627a19cd2aa4c36552156eb4edcf6c5a30bd4934fe58'
 
           - name: uchardet
             buildsystem: cmake-ninja
