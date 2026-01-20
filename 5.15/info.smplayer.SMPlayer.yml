@@ -89,7 +89,7 @@ modules:
               - --disable-doc
               - --disable-static
               - --disable-sdl2
-              - --disable-v4l2
+              #- --disable-v4l2
               - --enable-encoder=png
               - --enable-gnutls
               - --enable-gpl
