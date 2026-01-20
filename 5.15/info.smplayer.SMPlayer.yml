@@ -89,6 +89,7 @@ modules:
               - --disable-doc
               - --disable-static
               - --disable-sdl2
+              - --disable-v4l2
               - --enable-encoder=png
               - --enable-gnutls
               - --enable-gpl
@@ -104,7 +105,7 @@ modules:
               - --enable-libjxl
               #- --enable-libmysofa
               - --enable-libtheora
-              - --enable-libv4l2
+              #- --enable-libv4l2
               - --enable-libvorbis
               - --enable-libvpx
               #- --enable-libx264
